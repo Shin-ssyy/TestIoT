@@ -663,11 +663,11 @@ int main() {
     signal(SIGTERM, autoSaveHandler); // 종료 신호
     int id, grade, save, lang;
     char ans, choice;
-    char name[50], cellP[20], major[50];
+    char name[50], cellP[20], major[50], path[100];
 
     //설정 정보 불러오기
     FILE *fp = fopen("setting.txt", "r");
-    fscanf(fp, "%d", &lang);
+    fscanf(fp, "%d, %d", &lang, &save);
     fclose(fp);
 
     while (1) {
@@ -815,14 +815,14 @@ int main() {
                     printf("\n---- 프로그램 설정 ----\n");
                     printf("1. 데이터 정렬 방식 변경\n");
                     printf("2. 언어(Language)\n");
-                    printf("3. 자동저장(WIP)\n");
+                    printf("3. 자동저장\n");
                     printf("Q. 메뉴로 돌아가기\n");
                 }
                 else{
                     printf("\n---- Program Setting ----\n");
                     printf("1. Set data sorting method\n");
                     printf("2. Language\n");
-                    printf("3. Auto Save(WIP)\n");
+                    printf("3. Auto Save\n");
                     printf("Q. Back to main menu\n");
                 }
 
@@ -864,8 +864,18 @@ int main() {
 // 설정값 저장
                     // 설정 정보 저장
                     FILE *fp = fopen("setting.txt", "w");
-                    fprintf(fp, "%d\n", lang); // lang: 언어 설정 (0: 영어, 1: 한국어)
+                    fprintf(fp, "%d, %d\n", lang, save); // lang: 언어 설정 (0: 영어, 1: 한국어)
                     fclose(fp);
+                    if(save == 1){
+                        strcpy(path, AUTO_FILE_PATH);
+                        FILE *fp = fopen(path, "w"); // write mode
+                        for (int i = 0; i < MAX_DATA; i++) {
+                            if (database[i].isUsed) { // using data save
+                                fprintf(fp, "%d,%s,%d,%s,%s\n", database[i].id, database[i].name, database[i].grade, database[i].cellP, database[i].major);
+                            }
+                        }
+                        fclose(fp); //close file.
+                    }
                     return 0;
                 }
                 else{

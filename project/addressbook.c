@@ -815,14 +815,14 @@ int main() {
                     printf("\n---- 프로그램 설정 ----\n");
                     printf("1. 데이터 정렬 방식 변경\n");
                     printf("2. 언어(Language)\n");
-                    printf("3. 자동저장\n");
+                    printf("3. 자동저장(WIP)\n");
                     printf("Q. 메뉴로 돌아가기\n");
                 }
                 else{
                     printf("\n---- Program Setting ----\n");
                     printf("1. Set data sorting method\n");
                     printf("2. Language\n");
-                    printf("3. Auto Save\n");
+                    printf("3. Auto Save(WIP)\n");
                     printf("Q. Back to main menu\n");
                 }
 
